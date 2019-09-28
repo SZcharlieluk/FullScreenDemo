@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./node_modules/fullpage.js/dist/fullpage.css">
+    <link rel="stylesheet" href="./node_modules/animate.css/animate.css">
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./node_modules/fullpage.js/dist/fullpage.min.js"></script>
+    <style>
+        .slide, .section {
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+        }
+        img{
+            width: 70%;
+            height:60%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="fullpage">
+        <div class="section">
+            <div class="slide">
+                <img src="./static/456.jpg" class="animated rollIn" alt="">
+                <p class="animated bounceInLeft">Slide 1</p>
+            </div>
+            <div class="slide">
+                <img src="./static/123.jpg" alt="">
+                <p>Slide 2</p>
+            </div>
+            <div class="slide">
+                <img src="./static/456.jpg" alt="">
+                <p>Slide 3</p>
+            </div>
+            <div class="slide">
+                <img src="./static/123.jpg" alt="">
+                <p>Slide 4</p>
+            </div>
+        </div>
+        <div class="section">
+            <img src="./static/456.jpg" alt="">
+            <p>Some section2</p>
+        </div>
+        <div class="section">
+            <img src="./static/123.jpg" alt="">
+            <p>Some section3</p>
+        </div>
+        <div class="section">
+            <img src="./static/456.jpg" alt="">
+            <p>Some section4</p>
+        </div>
+    </div>
+</body>
+<script>
+    $(document).ready(function () {
+        $('#fullpage').fullpage({
+            //options here
+            navigation: true,
+            navigationPosition: 'right',
+            slidesNavigation: true,
+            autoScrolling: true,
+            loopHorizontal: true,
+            // loopBottom: true,
+            continuousVertical: true,
+            scrollHorizontally: true,
+            sectionsColor: ['#ccc', 'pink', 'yellow', 'darkgreen'],
+            showActiveTooltip: false,
+            navigationTooltips: ['one', 'two', 'three', 'four'],
+            onLeave: function (index, nextIndex, direction) {
+                var classListObj ={
+                    '0':['lightSpeedIn','bounceInLeft'],
+                    '1':['fadeInDownBig','bounceInRight'],
+                    '2':['fadeInLeftBig','bounceInUp'],
+                    '3':['fadeInRightBig','bounceInDown'],
+                }  
+                var i = nextIndex.index;
+                $('.section').each(function(idx,item){
+                    $(item).find('img').attr('class','');
+                    $(item).find('p').attr('class','');
+                });
+                $('.section').eq(i).find('img').addClass('animated').addClass(classListObj[i][0]);
+                $('.section').eq(i).find('p').addClass('animated').addClass(classListObj[i][1]);
+            }
+        });
+
+        //methods
+        $.fn.fullpage.setAllowScrolling(true);
+    });
+
+</script>
+
+</html>
